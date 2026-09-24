@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tonework — Ear Trainer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/test/style.css">
+</head>
+<body>
+<div class="console">
+
+  <div class="masthead">
+    <h1>Tonework</h1>
+    <div class="tagline">ear training bench</div>
+  </div>
+
+  <div class="mode-switch" id="modeSwitch">
+    <div class="thumb"></div>
+    <button class="active" data-mode="quiz" type="button">Identify the scale</button>
+    <button data-mode="trainer" type="button">Match the pitch</button>
+    <button data-mode="builder" type="button">Build a phrase</button>
+  </div>
+
+  <!-- QUIZ PANEL -->
+  <section class="panel" id="quizPanel">
+    <p class="panel-label">Press play, then name the scale you hear.</p>
+
+    <div class="btn-row">
+      <button class="action primary" id="quizPlayBtn" type="button">▶ Play scale</button>
+    </div>
+
+    <div class="answers">
+      <button data-answer="major" type="button">Major</button>
+      <button data-answer="minor" type="button">Minor</button>
+      <button data-answer="harmonicMinor" type="button">Harmonic minor</button>
+    </div>
+
+    <div class="score-line">
+      <span id="quizScore">Score: 0 / 0</span>
+      <span id="quizStreak">Streak: 0</span>
+    </div>
+
+    <div class="status" id="quizStatus">Play the scale when you're ready.</div>
+  </section>
+
+  <!-- TRAINER PANEL -->
+  <section class="panel" id="trainerPanel" hidden>
+    <p class="panel-label">Target note: <strong id="targetNoteLabel">—</strong></p>
+
+    <div class="gauge-wrap">
+      <svg class="gauge" viewBox="0 0 220 130" id="gaugeSvg">
+        <path class="arc" d="M 20 118 A 90 90 0 0 1 200 118"></path>
+        <g id="ticks"></g>
+        <g class="needle" id="needle">
+          <line x1="110" y1="118" x2="110" y2="40"></line>
+          <circle cx="110" cy="118" r="5"></circle>
+        </g>
+      </svg>
+      <div class="readout">
+        <div class="note" id="detectedNote">—</div>
+        <div class="cents" id="detectedCents">sing when ready</div>
+      </div>
+    </div>
+
+    <div class="btn-row">
+      <button class="action" id="playTargetBtn" type="button">▶ Play target</button>
+      <button class="action primary" id="listenBtn" type="button">● Start listening</button>
+    </div>
+
+    <div class="score-line">
+      <span id="trainerScore">Score: 0 / 0</span>
+      <button class="action" id="nextNoteBtn" type="button" style="flex:none;padding:6px 12px;font-size:13px;" hidden>Next note →</button>
+    </div>
+
+    <div class="status" id="trainerStatus">Play the target, then start listening and sing it back.</div>
+  </section>
+
+  <!-- BUILD-A-PHRASE PANEL -->
+  <section class="panel" id="builderPanel" hidden>
+    <p class="panel-label">Pick a root note, then tap scale degrees to build a sequence — e.g. root <strong>C</strong> + <strong>135</strong> plays C, E, G.</p>
+
+    <div class="root-select" id="rootSelect"></div>
+
+    <div class="sequence-display">
+      <span class="root-chip" id="rootChip">C</span>
+      <span class="sequence-text placeholder" id="sequenceText">Tap degrees to build a sequence</span>
+    </div>
+
+    <div class="numpad" id="numpad"></div>
+
+    <div class="numpad-actions">
+      <button type="button" id="backspaceBtn">⌫ Backspace</button>
+      <button type="button" id="clearSeqBtn">Clear</button>
+    </div>
+
+    <div class="btn-row">
+      <button class="action primary" id="builderPlayBtn" type="button">▶ Play sequence</button>
+    </div>
+
+    <div class="status" id="builderStatus">Select a root note, then tap degrees to build a sequence.</div>
+  </section>
+
+</div>
+
+<script src="/test/script.js"></script>
+</body>
+</html>
